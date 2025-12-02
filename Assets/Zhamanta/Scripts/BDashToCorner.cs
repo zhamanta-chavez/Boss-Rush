@@ -13,7 +13,7 @@ namespace Zhamanta
 
         public float speed = 10f;
 
-        private float timeElapsed;
+        //private float timeElapsed;
         private int index = 0;
         private int currentIndex = -1;
         
@@ -27,13 +27,13 @@ namespace Zhamanta
             animator.ResetTrigger("attack_sequence_done");
             animator.ResetTrigger("walk");
             canChoosePoint = true;
-            timeElapsed = 0f;
+            //timeElapsed = 0f;
         }
 
         //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            timeElapsed = Time.deltaTime;
+            //timeElapsed = Time.deltaTime;
 
             //Choose Point to Move Towards
             if (canChoosePoint)

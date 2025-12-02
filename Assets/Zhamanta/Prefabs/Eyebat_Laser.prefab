@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7662675880251819888}
   - component: {fileID: 4640277890063997022}
   - component: {fileID: 7733387133243672146}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Eyebat_Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Zhamanta
@@ -29,39 +30,44 @@ namespace Zhamanta
         {
             elapsedTime += Time.deltaTime;
 
-            //Look at Player
-            Vector3 directionToTarget = (player.position - eyebat.transform.position);
-            directionToTarget.y = 0;
-            eyebat.transform.rotation = Quaternion.Slerp(eyebat.transform.rotation,
-                Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
-
-            //Shoot Player (Ranged Attack)
-            if (elapsedTime >= 1.5f && canShoot)
+            if (animTracker.JustEnteredStage2()) //Transition to Stage2
             {
-                canShoot = false;
-                GameObject p = Instantiate(projectile, eyebat.transform.position + new Vector3(0, 5f, 0), Quaternion.identity);
-                //GameObject p = Instantiate(projectile, eyebat.transform.position, Quaternion.identity);
-                animTracker.IncreaseShootCount();
-                p.transform.forward = eyebat.transform.forward;
-                
-                if (animTracker.GetShootCount() >= 5)
+                animator.SetTrigger("stage2");
+            }
+            else //Sequence Attack
+            {
+                //Look at Player
+                Vector3 directionToTarget = (player.position - eyebat.transform.position);
+                directionToTarget.y = 0;
+                eyebat.transform.rotation = Quaternion.Slerp(eyebat.transform.rotation,
+                    Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
+
+                //Shoot Player (Ranged Attack)
+                if (elapsedTime >= 1.5f && canShoot)
                 {
-                    if (animTracker.GetShootCount() % 5 == 0)
+                    canShoot = false;
+                    GameObject p = Instantiate(projectile, eyebat.transform.position + new Vector3(0, 5f, 0), Quaternion.identity);
+                    //GameObject p = Instantiate(projectile, eyebat.transform.position, Quaternion.identity);
+                    animTracker.IncreaseShootCount();
+                    p.transform.forward = eyebat.transform.forward;
+
+                    if (animTracker.GetShootCount() >= 5)
                     {
-                        animator.SetTrigger("attack_sequence_done");
+                        if (animTracker.GetShootCount() % 5 == 0)
+                        {
+                            animator.SetTrigger("attack_sequence_done");
+                        }
+                        else
+                        {
+                            animator.SetTrigger("continue_sequence");
+                        }
                     }
                     else
                     {
                         animator.SetTrigger("continue_sequence");
                     }
                 }
-                else
-                {
-                    animator.SetTrigger("continue_sequence");
-                }
             }
-
-
         }
 
         //OnStateExit is called when a transition ends and the state machine finishes evaluating this state

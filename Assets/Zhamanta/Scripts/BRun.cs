@@ -1,21 +1,24 @@
-using JetBrains.Annotations;
+using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Zhamanta
 {
-    public class BWalk : StateMachineBehaviour
+    public class BRun : StateMachineBehaviour
     {
         [SerializeField] AnimatorTracker animTracker;
         Eyebat eyebat;
         Transform player;
         Rigidbody rb;
 
-        public float speed = 2f;
+        public float speed = 3f;
 
         private float timeElapsed = 0f;
 
         private bool canIncreaseAttackCount;
+
+        private bool canChooseAttack;
+        private int index = 0;
+        private int currentIndex = -1;
 
         //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,10 +26,13 @@ namespace Zhamanta
             animator.ResetTrigger("attack_sequence_done");
             animator.ResetTrigger("laser");
             animator.ResetTrigger("electric_floor");
+            animator.ResetTrigger("revolving_doors");
+
             eyebat = FindFirstObjectByType<Eyebat>();
             player = eyebat.Target;
             rb = eyebat.Rb;
             canIncreaseAttackCount = true;
+            canChooseAttack = true;
 
             // Works even when coming from electric floor attack
             if (animTracker.GetShootCount() >= 5)
@@ -50,7 +56,7 @@ namespace Zhamanta
             rb.MovePosition(newPos);
 
             //Look at Player
-            Vector3 directionToTarget = (player.position - eyebat.transform.position);
+            Vector3 directionToTarget = player.position - eyebat.transform.position;
             directionToTarget.y = 0;
             eyebat.transform.rotation = Quaternion.Slerp(eyebat.transform.rotation,
                 Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
@@ -63,36 +69,40 @@ namespace Zhamanta
                 animator.SetTrigger("attack_01");
             }
 
+            //Choose Attack
+            if (canChooseAttack)
+            {
+                canChooseAttack = false;
+                do
+                {
+                    index = UnityEngine.Random.Range(0, 3);
+                } while (index == currentIndex);
+
+                currentIndex = index;
+            }
+
             //Transition to Attack
             if (timeElapsed >= 5f)
             {
-                if (canIncreaseAttackCount)
+                switch (currentIndex)
                 {
-                    canIncreaseAttackCount = false;
-                    animTracker.IncreaseAttackCount();
-                }
-                if (animTracker.GetAttackCount() < 2)
-                {
-                    animator.SetTrigger("attack_sequence");
-                }
-                if (animTracker.GetAttackCount() >= 2)
-                {
-                    if (animTracker.GetAttackCount() % 2 == 0)
-                    {
-                        animator.SetTrigger("electric_floor");
-                    }
-                    else
-                    {
+                    case 0:
                         animator.SetTrigger("attack_sequence");
-                    }
+                        break;
+                    case 1:
+                        animator.SetTrigger("electric_floor");
+                        break;
+                    case 2:
+                        animator.SetTrigger("revolving_doors");
+                        break;
                 }
             }
 
-            //Transition to Stage2
-            if (animTracker.Stage2())
+            //Transition to Stage3
+            /*if (animTracker.Stage2())
             {
                 animator.SetTrigger("stage2");
-            }
+            }*/
         }
 
         //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -105,5 +115,6 @@ namespace Zhamanta
         {
             timeElapsed = 0f;
         }
+
     }
 }
