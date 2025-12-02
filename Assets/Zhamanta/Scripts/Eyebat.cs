@@ -14,10 +14,5 @@ namespace Zhamanta
 
         [field: SerializeField] public Transform[] Points { get; set; }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-
-        }
     }
 }

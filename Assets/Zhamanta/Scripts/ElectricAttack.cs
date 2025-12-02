@@ -36,7 +36,7 @@ namespace Zhamanta
             }
 
             electricFloor.SetActive(true);
-            yield return new WaitForSeconds(.7f);
+            yield return new WaitForSeconds(.3f);
             electricFloor.SetActive(false);
         }
     }

@@ -9,7 +9,6 @@ namespace Zhamanta
 
         Eyebat eyebat;
         Transform player;
-        Rigidbody rb;
 
         private float elapsedTime;
         private bool canShoot;
@@ -19,7 +18,6 @@ namespace Zhamanta
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             eyebat = FindFirstObjectByType<Eyebat>();
-            rb = eyebat.Rb;
             player = eyebat.Target;
 
             elapsedTime = 0f;
@@ -42,6 +40,7 @@ namespace Zhamanta
             {
                 canShoot = false;
                 GameObject p = Instantiate(projectile, eyebat.transform.position + new Vector3(0, 5f, 0), Quaternion.identity);
+                //GameObject p = Instantiate(projectile, eyebat.transform.position, Quaternion.identity);
                 animTracker.IncreaseShootCount();
                 p.transform.forward = eyebat.transform.forward;
                 
