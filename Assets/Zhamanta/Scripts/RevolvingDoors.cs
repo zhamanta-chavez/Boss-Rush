@@ -1,18 +1,22 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.Splines;
 
 namespace Zhamanta
 {
     public class RevolvingDoors : MonoBehaviour
     {
-        [SerializeField] GameObject[] doors;
+        [SerializeField] GameObject splineParent;
+        private Door[] doors;
 
         private void Start()
         {
+            doors = splineParent.GetComponentsInChildren<Door>();
+
             for (int i = 0; i < doors.Length; i++)
             {
-                doors[i].SetActive(false);
+                doors[i].SeparateDoors();
             }
         }
 
@@ -20,7 +24,7 @@ namespace Zhamanta
         {
             for (int i = 0; i < doors.Length; i++)
             {
-                doors[i].SetActive(true);
+                doors[i].gameObject.SetActive(true);
             }
         }
     }

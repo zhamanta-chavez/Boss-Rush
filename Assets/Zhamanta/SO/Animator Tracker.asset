@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe01cfd38e27414fa32d93a6ba7a4cd, type: 3}
   m_Name: Animator Tracker
   m_EditorClassIdentifier: Assembly-CSharp::Zhamanta.AnimatorTracker
-  shootCount: 65
-  attackCount: 2
+  shootCount: 5
+  attackCount: 0

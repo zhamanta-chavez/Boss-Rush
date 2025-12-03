@@ -55,43 +55,47 @@ namespace Zhamanta
             eyebat.transform.rotation = Quaternion.Slerp(eyebat.transform.rotation,
                 Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
 
-            //Transition to Melee Attack
-            float distanceToTarget = Vector3.Distance(eyebat.transform.position, eyebat.Target.position);
 
-            if (distanceToTarget <= 5f)
+            //Transition to Stage2
+            if (animTracker.JustEnteredStage2() == true)
             {
-                animator.SetTrigger("attack_01");
+                Debug.Log("Walk: Just Entered");
+                animator.SetTrigger("stage2");
             }
-
-            //Transition to Attack
-            if (timeElapsed >= 5f)
+            else
             {
-                if (canIncreaseAttackCount)
+                //Transition to Melee Attack
+                float distanceToTarget = Vector3.Distance(eyebat.transform.position, eyebat.Target.position);
+
+                if (distanceToTarget <= 5f)
                 {
-                    canIncreaseAttackCount = false;
-                    animTracker.IncreaseAttackCount();
+                    animator.SetTrigger("attack_01");
                 }
-                if (animTracker.GetAttackCount() < 2)
+
+                //Transition to Attack
+                if (timeElapsed >= 5f)
                 {
-                    animator.SetTrigger("attack_sequence");
-                }
-                if (animTracker.GetAttackCount() >= 2)
-                {
-                    if (animTracker.GetAttackCount() % 2 == 0)
+                    if (canIncreaseAttackCount)
                     {
-                        animator.SetTrigger("electric_floor");
+                        canIncreaseAttackCount = false;
+                        animTracker.IncreaseAttackCount();
                     }
-                    else
+                    if (animTracker.GetAttackCount() < 2)
                     {
                         animator.SetTrigger("attack_sequence");
                     }
+                    if (animTracker.GetAttackCount() >= 2)
+                    {
+                        if (animTracker.GetAttackCount() % 2 == 0)
+                        {
+                            animator.SetTrigger("electric_floor");
+                        }
+                        else
+                        {
+                            animator.SetTrigger("attack_sequence");
+                        }
+                    }
                 }
-            }
-
-            //Transition to Stage2
-            if (animTracker.Stage2())
-            {
-                animator.SetTrigger("stage2");
             }
         }
 

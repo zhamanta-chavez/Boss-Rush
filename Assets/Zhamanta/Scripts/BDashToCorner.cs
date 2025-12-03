@@ -6,6 +6,8 @@ namespace Zhamanta
 {
     public class BDashToCorner : StateMachineBehaviour
     {
+        [SerializeField] AnimatorTracker animTracker;
+
         private bool canChoosePoint;
 
         Eyebat eyebat;
@@ -35,28 +37,35 @@ namespace Zhamanta
         {
             //timeElapsed = Time.deltaTime;
 
-            //Choose Point to Move Towards
-            if (canChoosePoint)
+            if (animTracker.JustEnteredStage2() == true) //Transition to Stage2
             {
-                canChoosePoint = false;
-                do
+                Debug.Log("Just Entered");
+                animator.SetTrigger("stage2");
+            }
+            else
+            {
+                //Choose Point to Move Towards
+                if (canChoosePoint)
                 {
-                    index = Random.Range(0, 4);
-                } while (index == currentIndex);
+                    canChoosePoint = false;
+                    do
+                    {
+                        index = Random.Range(0, 4);
+                    } while (index == currentIndex);
 
-                currentIndex = index;
+                    currentIndex = index;
+                }
+
+                //Move Towards Point
+                Vector3 target = new Vector3(eyebat.Points[index].position.x, eyebat.Points[index].position.y, eyebat.Points[index].position.z);
+                Vector3 newPos = Vector3.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+                rb.MovePosition(newPos);
+
+                if (rb.position == newPos)
+                {
+                    animator.SetTrigger("laser");
+                }
             }
-
-            //Move Towards Point
-            Vector3 target = new Vector3(eyebat.Points[index].position.x, rb.position.y, eyebat.Points[index].position.z);
-            Vector3 newPos = Vector3.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-            rb.MovePosition(newPos);
-
-            if (rb.position == newPos)
-            {
-                animator.SetTrigger("laser");
-            }
-
         }
 
         //OnStateExit is called when a transition ends and the state machine finishes evaluating this state

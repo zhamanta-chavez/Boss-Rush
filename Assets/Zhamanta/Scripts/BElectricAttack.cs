@@ -14,6 +14,7 @@ namespace Zhamanta
         [SerializeField] AnimatorTracker animTracker;
 
         private bool canTrigger;
+        [SerializeField] float speedToCenter = 1;
 
         //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -35,14 +36,23 @@ namespace Zhamanta
             eyebat.transform.rotation = Quaternion.Slerp(eyebat.transform.rotation,
                 Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
 
-            // Move to high center
-            rb.MovePosition(new Vector3(0, 7, 0));
-
-            if (canTrigger)
+            if (animTracker.JustEnteredStage2() == true) //Transition to Stage2
             {
-                canTrigger = false;
-                animator.GetComponent<ElectricAttack>().ActivateElectricAttack();
-                animator.SetTrigger("walk");
+                Debug.Log("Just Entered");
+                animator.SetTrigger("stage2");
+            }
+            else
+            {
+                // Move to high center
+                Vector3 newPos = Vector3.MoveTowards(rb.position, new Vector3(0, 7, 0), speedToCenter * Time.fixedDeltaTime);
+                rb.MovePosition(newPos);
+
+                if (canTrigger)
+                {
+                    canTrigger = false;
+                    animator.GetComponent<ElectricAttack>().ActivateElectricAttack();
+                    animator.SetTrigger("walk");
+                }
             }
         }
 

@@ -27,7 +27,6 @@ namespace Zhamanta
         {
             while (signCount <= 2)
             {
-                Debug.Log(signCount);
                 electricSign.SetActive(true);
                 yield return new WaitForSeconds(.2f);
                 electricSign.SetActive(false);

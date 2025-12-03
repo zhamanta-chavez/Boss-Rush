@@ -30,10 +30,14 @@ namespace Zhamanta
             return attackCount;
         }
 
-        public void SwicthStage2()
+        public void ActivateStage2()
         {
-            stage2 = !stage2;
-            Debug.Log(stage2);
+            stage2 = true;
+        }
+
+        public void FinishActivatingStage2()
+        {
+            stage2 = false;
         }
 
         public bool JustEnteredStage2()

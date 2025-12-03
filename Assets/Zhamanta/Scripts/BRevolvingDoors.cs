@@ -12,20 +12,26 @@ namespace Zhamanta
 
         private bool canTrigger;
 
+        private float timeElapsed;
+        [SerializeField] float speedToCenter = 1;
+
         //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            animator.ResetTrigger("run");
+            animator.ResetTrigger("walk");
 
             eyebat = FindFirstObjectByType<Eyebat>();
             rb = eyebat.Rb;
             player = eyebat.Target;
             canTrigger = true;
+            timeElapsed = 0;
         }
 
         //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            timeElapsed += Time.deltaTime;
+
             //Look at Player
             Vector3 directionToTarget = (player.position - eyebat.transform.position);
             directionToTarget.y = 0;
@@ -33,12 +39,18 @@ namespace Zhamanta
                 Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
 
             // Move to high center
-            rb.MovePosition(new Vector3(0, 7, 0));
+            Vector3 newPos = Vector3.MoveTowards(rb.position, new Vector3(0, 7, 0), speedToCenter * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);
 
             if (canTrigger)
             {
                 canTrigger = false;
                 animator.GetComponent<RevolvingDoors>().ActivateRevolvingDoors();
+            }
+
+            if (timeElapsed >= 11f)
+            {
+                animator.SetTrigger("walk");
             }
         }
 

@@ -50,7 +50,7 @@ namespace Zhamanta
             timeElapsed += Time.deltaTime;
 
             //Chase Player
-            Vector3 target = new Vector3(player.position.x, -1.5f, player.position.z);
+            Vector3 target = new Vector3(player.position.x, player.position.y, player.position.z);
             //Vector3 target = new Vector3(player.position.x, player.position.y, player.position.z);
             Vector3 newPos = Vector3.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
@@ -108,7 +108,7 @@ namespace Zhamanta
         //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-
+            Debug.Log(animTracker.JustEnteredStage2());
         }
 
         public void ResetTimer()

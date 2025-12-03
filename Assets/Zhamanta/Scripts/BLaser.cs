@@ -1,5 +1,6 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Zhamanta
 {
@@ -18,6 +19,11 @@ namespace Zhamanta
         //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            animator.ResetTrigger("attack_01");
+            animator.ResetTrigger("attack_sequence");
+            animator.ResetTrigger("stage2");
+
+
             eyebat = FindFirstObjectByType<Eyebat>();
             player = eyebat.Target;
 
@@ -30,12 +36,14 @@ namespace Zhamanta
         {
             elapsedTime += Time.deltaTime;
 
-            if (animTracker.JustEnteredStage2()) //Transition to Stage2
+            if (animTracker.JustEnteredStage2() == true) //Transition to Stage2
             {
                 animator.SetTrigger("stage2");
+                Debug.Log("Just Entered");
             }
             else //Sequence Attack
             {
+                Debug.Log("Here");
                 //Look at Player
                 Vector3 directionToTarget = (player.position - eyebat.transform.position);
                 directionToTarget.y = 0;

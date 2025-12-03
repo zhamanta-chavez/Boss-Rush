@@ -2202,7 +2202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineAnimate
   m_Target: {fileID: 804039847}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_LoopMode: 1
   m_Method: 0
   m_Duration: 5
@@ -2252,8 +2252,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   sa: {fileID: 1295688866}
   sp: {fileID: 1295688867}
+  box: {fileID: 1295688868}
   fadeSpeed: 1
-  fadeSpeed2: 3
+  fadeSpeed2: 2
 --- !u!114 &1295688870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2299,6 +2300,10 @@ PrefabInstance:
     - target: {fileID: 15533682076125487, guid: 2d40fc55e6790214eb5ac25947626890, type: 3}
       propertyPath: m_Name
       value: Instance-3
+      objectReference: {fileID: 0}
+    - target: {fileID: 15533682076125487, guid: 2d40fc55e6790214eb5ac25947626890, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 15533682076125487, guid: 2d40fc55e6790214eb5ac25947626890, type: 3}
       propertyPath: m_IsActive
@@ -2448,6 +2453,10 @@ PrefabInstance:
     - target: {fileID: 15533682076125487, guid: 2d40fc55e6790214eb5ac25947626890, type: 3}
       propertyPath: m_Name
       value: Instance-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 15533682076125487, guid: 2d40fc55e6790214eb5ac25947626890, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 15533682076125487, guid: 2d40fc55e6790214eb5ac25947626890, type: 3}
       propertyPath: m_IsActive
@@ -2807,10 +2816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebbf5ac1e1251b4ab5f24d2cd6eea8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RevolvingDoors
-  doors:
-  - {fileID: 2053337028}
-  - {fileID: 1295688864}
-  - {fileID: 1761973480}
+  splineParent: {fileID: 804039846}
 --- !u!4 &1647387219 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1006638580743620499, guid: 1e4a147e124dd8f4ab5d82f7492c3cc3, type: 3}
@@ -3158,7 +3164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineAnimate
   m_Target: {fileID: 804039847}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_LoopMode: 1
   m_Method: 0
   m_Duration: 5
@@ -3208,8 +3214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   sa: {fileID: 1761973482}
   sp: {fileID: 1761973483}
+  box: {fileID: 1761973484}
   fadeSpeed: 1
-  fadeSpeed2: 3
+  fadeSpeed2: 2
 --- !u!114 &1761973486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3804,7 +3811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineAnimate
   m_Target: {fileID: 804039847}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_LoopMode: 1
   m_Method: 0
   m_Duration: 5
@@ -3854,8 +3861,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   sa: {fileID: 2053337030}
   sp: {fileID: 2053337031}
+  box: {fileID: 2053337032}
   fadeSpeed: 1
-  fadeSpeed2: 3
+  fadeSpeed2: 2
 --- !u!114 &2053337034
 MonoBehaviour:
   m_ObjectHideFlags: 0
