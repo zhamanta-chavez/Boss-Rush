@@ -10,6 +10,7 @@ namespace Zhamanta
     public class StageDeterminant : MonoBehaviour
     {
         [SerializeField] private Image barFill;
+        [SerializeField] Animator animator;
         [SerializeField] AnimatorTracker animTracker;
         [SerializeField] GameObject trail;
         [SerializeField] GameObject arrows;
@@ -71,6 +72,17 @@ namespace Zhamanta
         public void MakeArrowsFall()
         {
             arrows.SetActive(true);
+        }
+
+        public void Heal()
+        {
+            if (barFill.fillAmount <= .9)
+            {
+                animator.ResetTrigger("walk");
+                animator.ResetTrigger("attack_01");
+                animator.SetTrigger("heal");
+                Debug.Log("Heal Set");
+            }
         }
     }
 }

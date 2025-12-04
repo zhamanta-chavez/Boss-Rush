@@ -20,6 +20,7 @@ namespace Zhamanta
         //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            animator.ResetTrigger("heal");
             animator.ResetTrigger("attack_sequence_done");
             animator.ResetTrigger("laser");
             animator.ResetTrigger("electric_floor");
@@ -45,7 +46,6 @@ namespace Zhamanta
             {
                 timeElapsed = 0;
             }
-            Debug.Log(timeElapsed);
         }
 
         //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -84,7 +84,7 @@ namespace Zhamanta
                 }
 
                 //Transition to Attack
-                if (timeElapsed >= 5f)
+                if (timeElapsed >= 6f)
                 {
                     Debug.Log("what");
                     animTracker.SetFromAttack1(false);
