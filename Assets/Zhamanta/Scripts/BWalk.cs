@@ -28,14 +28,24 @@ namespace Zhamanta
             rb = eyebat.Rb;
             canIncreaseAttackCount = true;
 
-            // Works even when coming from electric floor attack
-            if (animTracker.GetShootCount() >= 5)
+            /*if (animTracker.GetShootCount() >= 5)
             {
                 if (animTracker.GetShootCount() % 5 == 0)
                 {
                     timeElapsed = 0;
+                    Debug.Log("Reset to 0");
                 }
+            }*/
+
+            if (animTracker.GetFromAttack1() == true)
+            {
+                //animTracker.SetFromAttack1(false);
             }
+            else
+            {
+                timeElapsed = 0;
+            }
+            //Debug.Log(timeElapsed);
         }
 
         //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -59,7 +69,7 @@ namespace Zhamanta
             //Transition to Stage2
             if (animTracker.JustEnteredStage2() == true)
             {
-                Debug.Log("Walk: Just Entered");
+                Debug.Log("Walk: Just Entered Stage 2");
                 animator.SetTrigger("stage2");
             }
             else
@@ -69,12 +79,14 @@ namespace Zhamanta
 
                 if (distanceToTarget <= 5f)
                 {
+                    animTracker.SetFromAttack1(true);
                     animator.SetTrigger("attack_01");
                 }
 
                 //Transition to Attack
                 if (timeElapsed >= 5f)
                 {
+                    animTracker.SetFromAttack1(false);
                     if (canIncreaseAttackCount)
                     {
                         canIncreaseAttackCount = false;
@@ -82,16 +94,19 @@ namespace Zhamanta
                     }
                     if (animTracker.GetAttackCount() < 2)
                     {
+                        //timeElapsed = 0;
                         animator.SetTrigger("attack_sequence");
                     }
-                    if (animTracker.GetAttackCount() >= 2)
+                    else if (animTracker.GetAttackCount() >= 2)
                     {
                         if (animTracker.GetAttackCount() % 2 == 0)
                         {
+                            //timeElapsed = 0;
                             animator.SetTrigger("electric_floor");
                         }
                         else
                         {
+                            //timeElapsed = 0;
                             animator.SetTrigger("attack_sequence");
                         }
                     }
@@ -103,11 +118,6 @@ namespace Zhamanta
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
 
-        }
-
-        public void ResetTimer()
-        {
-            timeElapsed = 0f;
         }
     }
 }

@@ -42,15 +42,24 @@ namespace Zhamanta
             Vector3 newPos = Vector3.MoveTowards(rb.position, new Vector3(0, 7, 0), speedToCenter * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
 
-            if (canTrigger)
+            if (animTracker.JustEnteredStage3() == true) //Transition to Stage3
             {
-                canTrigger = false;
-                animator.GetComponent<RevolvingDoors>().ActivateRevolvingDoors();
+                Debug.Log("Doors: Just Entered Stage 3");
+                animator.SetTrigger("stage3");
             }
-
-            if (timeElapsed >= 11f)
+            else
             {
-                animator.SetTrigger("walk");
+                if (canTrigger)
+                {
+                    animTracker.IncreaseIndex();
+                    canTrigger = false;
+                    animator.GetComponent<RevolvingDoors>().ActivateRevolvingDoors();
+                }
+
+                if (timeElapsed >= 11f)
+                {
+                    animator.SetTrigger("walk");
+                }
             }
         }
 

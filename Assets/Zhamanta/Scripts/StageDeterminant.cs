@@ -14,13 +14,16 @@ namespace Zhamanta
         [SerializeField] GameObject trail;
 
         private bool canInvokeHalfLife;
+        private bool canInvokeNearDeath;
 
         public UnityEvent OnHalfLife;
+        public UnityEvent OnNearDeath;
 
         private void Start()
         {
             animTracker.ResetValues();
             canInvokeHalfLife = true;
+            canInvokeNearDeath = true;
             trail.SetActive(false);
         }
 
@@ -32,10 +35,16 @@ namespace Zhamanta
                 OnHalfLife.Invoke();
             }
 
+            if (barFill.fillAmount <= .1f && canInvokeNearDeath)
+            {
+                Debug.Log("Should activate stage 3");
+                StartCoroutine(Stage3Margin());
+                OnNearDeath.Invoke();
+            }
+
             if (animTracker.GetTrailState() == true)
             {
                 trail.SetActive(true);
-                Debug.Log("Trail should be active");
             }
             else
             {
@@ -48,6 +57,13 @@ namespace Zhamanta
             yield return new WaitForSeconds(3f);
             canInvokeHalfLife = false;
             animTracker.FinishActivatingStage2();
+        }
+
+        IEnumerator Stage3Margin()
+        {
+            yield return new WaitForSeconds(3f);
+            canInvokeNearDeath = false;
+            animTracker.FinishActivatingStage3();
         }
     }
 }

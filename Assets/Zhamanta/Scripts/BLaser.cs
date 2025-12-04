@@ -38,7 +38,13 @@ namespace Zhamanta
 
             if (animTracker.JustEnteredStage2() == true) //Transition to Stage2
             {
+                Debug.Log("Laser: Just Entered Stage 2");
                 animator.SetTrigger("stage2");
+            }
+            else if (animTracker.JustEnteredStage3() == true) //Transition to Stage3
+            {
+                Debug.Log("Laser: Just Entered Stage 3");
+                animator.SetTrigger("stage3");
             }
             else //Sequence Attack
             {
@@ -57,23 +63,19 @@ namespace Zhamanta
                     animTracker.IncreaseShootCount();
                     p.transform.forward = eyebat.transform.forward;
 
-                    if (animTracker.GetShootCount() >= 5)
+                    if (animTracker.GetShootCount() == 5)
                     {
-                        if (animTracker.GetShootCount() % 5 == 0)
+                        if (animTracker.OnStage2() == true)
                         {
-                            if (animTracker.OnStage2() == true)
-                            {
-                                animTracker.TrailState(false);
-                            }
-                            animator.SetTrigger("attack_sequence_done");
+                            animTracker.TrailState(false);
                         }
-                        else
-                        {
-                            animator.SetTrigger("continue_sequence");
-                        }
+                        animTracker.ResetShootCount();
+                        Debug.Log("Does this happen once?");
+                        animator.SetTrigger("attack_sequence_done");
                     }
                     else
                     {
+                        animTracker.IncreaseIndex();
                         animator.SetTrigger("continue_sequence");
                     }
                 }

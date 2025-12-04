@@ -38,7 +38,13 @@ namespace Zhamanta
 
             if (animTracker.JustEnteredStage2() == true) //Transition to Stage2
             {
+                Debug.Log("Electric: Just Entered Stage 2");
                 animator.SetTrigger("stage2");
+            }
+            else if (animTracker.JustEnteredStage3() == true) //Transition to Stage3
+            {
+                Debug.Log("Electric: Just Entered Stage 3");
+                animator.SetTrigger("stage3");
             }
             else
             {
@@ -48,6 +54,7 @@ namespace Zhamanta
 
                 if (canTrigger)
                 {
+                    animTracker.IncreaseIndex();
                     canTrigger = false;
                     animator.GetComponent<ElectricAttack>().ActivateElectricAttack();
                     animator.SetTrigger("walk");

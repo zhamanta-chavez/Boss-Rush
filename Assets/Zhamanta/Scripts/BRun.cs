@@ -34,14 +34,15 @@ namespace Zhamanta
             canIncreaseAttackCount = true;
             canChooseAttack = true;
 
-            // Works even when coming from electric floor attack
-            if (animTracker.GetShootCount() >= 5)
+            if (animTracker.GetFromAttack1() == true)
             {
-                if (animTracker.GetShootCount() % 5 == 0)
-                {
-                    timeElapsed = 0;
-                }
+                //animTracker.SetFromAttack1(false);
             }
+            else
+            {
+                timeElapsed = 0;
+            }
+            //Debug.Log(timeElapsed);
         }
 
         //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -50,7 +51,7 @@ namespace Zhamanta
             timeElapsed += Time.deltaTime;
 
             //Chase Player
-            Vector3 target = new Vector3(player.position.x, player.position.y, player.position.z);
+            Vector3 target = new Vector3(player.position.x, 0, player.position.z);
             //Vector3 target = new Vector3(player.position.x, player.position.y, player.position.z);
             Vector3 newPos = Vector3.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
@@ -61,48 +62,58 @@ namespace Zhamanta
             eyebat.transform.rotation = Quaternion.Slerp(eyebat.transform.rotation,
                 Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
 
-            //Transition to Melee Attack
-            float distanceToTarget = Vector3.Distance(eyebat.transform.position, eyebat.Target.position);
-
-            if (distanceToTarget <= 5f)
+            //Transition to Stage3
+            if (animTracker.JustEnteredStage3() == true)
             {
-                animator.SetTrigger("attack_01");
+                Debug.Log("Run: Just Entered Stage 3");
+                animator.SetTrigger("stage3");
             }
-
-            //Choose Attack
-            if (canChooseAttack)
+            else
             {
-                canChooseAttack = false;
-                do
-                {
-                    index = UnityEngine.Random.Range(0, 3);
-                } while (index == currentIndex);
+                //Transition to Melee Attack
+                float distanceToTarget = Vector3.Distance(eyebat.transform.position, eyebat.Target.position);
 
-                currentIndex = index;
-            }
-
-            //Transition to Attack
-            if (timeElapsed >= 5f)
-            {
-                switch (currentIndex)
+                if (distanceToTarget <= 5f)
                 {
-                    case 0:
-                        animator.SetTrigger("attack_sequence");
-                        break;
-                    case 1:
-                        animator.SetTrigger("electric_floor");
-                        break;
-                    case 2:
-                        animator.SetTrigger("revolving_doors");
-                        break;
+                    animTracker.SetFromAttack1(true);
+                    animator.SetTrigger("attack_01");
+                }
+
+                //Choose Attack
+                /*if (canChooseAttack)
+                {
+                    canChooseAttack = false;
+                    do
+                    {
+                        index = UnityEngine.Random.Range(0, 3);
+                    } while (index == currentIndex);
+
+                    currentIndex = index;
+                    Debug.Log(currentIndex);
+                }*/
+
+                //Transition to Attack
+                if (timeElapsed >= 5f)
+                {
+                    Debug.Log("Here");
+                    animTracker.SetFromAttack1(false);
+                    switch (animTracker.GetAttackIndex())
+                    {
+                        case 0:
+                            //timeElapsed = 0;
+                            animator.SetTrigger("attack_sequence");
+                            break;
+                        case 1:
+                            //timeElapsed = 0;
+                            animator.SetTrigger("electric_floor");
+                            break;
+                        case 2:
+                            //timeElapsed = 0;
+                            animator.SetTrigger("revolving_doors");
+                            break;
+                    }
                 }
             }
-
-            //Transition to Stage3
-            /*if (animTracker.Stage2())
-            {
-                animator.SetTrigger("stage2");
-            }*/
         }
 
         //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -110,11 +121,5 @@ namespace Zhamanta
         {
             
         }
-
-        public void ResetTimer()
-        {
-            timeElapsed = 0f;
-        }
-
     }
 }
