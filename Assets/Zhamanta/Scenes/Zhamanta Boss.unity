@@ -2249,6 +2249,7 @@ MonoBehaviour:
   animTracker: {fileID: 11400000, guid: b86a1c2a1eb7aed4fbdd3c7da9ae95d8, type: 2}
   trail: {fileID: 747226713}
   arrows: {fileID: 1582269676}
+  bossDamageable: {fileID: 1256897411}
   OnHalfLife:
     m_PersistentCalls:
       m_Calls:

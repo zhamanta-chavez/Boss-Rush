@@ -14,6 +14,8 @@ namespace Zhamanta
         [SerializeField] AnimatorTracker animTracker;
         [SerializeField] GameObject trail;
         [SerializeField] GameObject arrows;
+        [SerializeField] Damageable bossDamageable;
+        [SerializeField] Retreat patienceSensor;
 
         private bool canInvokeHalfLife;
         private bool canInvokeNearDeath;
@@ -57,16 +59,23 @@ namespace Zhamanta
 
         IEnumerator Stage2Margin()
         {
-            yield return new WaitForSeconds(3.5f);
+            patienceSensor.enabled = false;
+            bossDamageable.enabled = false;
+            yield return new WaitForSeconds(6f);
             canInvokeHalfLife = false;
             animTracker.FinishActivatingStage2();
+            patienceSensor.enabled = true;
+            bossDamageable.enabled = true;
         }
 
         IEnumerator Stage3Margin()
         {
-            yield return new WaitForSeconds(3.5f);
+            patienceSensor.enabled = false;
+            bossDamageable.enabled = false;
+            yield return new WaitForSeconds(6f);
             canInvokeNearDeath = false;
             animTracker.FinishActivatingStage3();
+            bossDamageable.enabled = true;
         }
 
         public void MakeArrowsFall()
@@ -82,6 +91,24 @@ namespace Zhamanta
                 animator.ResetTrigger("attack_01");
                 animator.SetTrigger("heal");
                 Debug.Log("Heal Set");
+            }
+        }
+
+        public void Dying()
+        {
+            if (barFill.fillAmount <= 0)
+            {
+                animator.ResetTrigger("heal");
+                animator.ResetTrigger("attack_sequence_done");
+                animator.ResetTrigger("attack_sequence");
+                animator.ResetTrigger("laser");
+                animator.ResetTrigger("electric_floor");
+                animator.ResetTrigger("revolving_doors");
+                animator.ResetTrigger("attack_01");
+                animator.ResetTrigger("walk");
+                animator.SetTrigger("dying");
+                bossDamageable.enabled = false;
+                Debug.Log("Dying set");
             }
         }
     }

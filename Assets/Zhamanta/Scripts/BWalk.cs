@@ -53,11 +53,7 @@ namespace Zhamanta
         {
             timeElapsed += Time.deltaTime;
 
-            //Chase Player
-            Vector3 target = new Vector3(player.position.x, -1.5f, player.position.z);
-            //Vector3 target = new Vector3(player.position.x, player.position.y, player.position.z);
-            Vector3 newPos = Vector3.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-            rb.MovePosition(newPos);
+            float distanceToTarget = Vector3.Distance(eyebat.transform.position, eyebat.Target.position);
 
             //Look at Player
             Vector3 directionToTarget = (player.position - eyebat.transform.position);
@@ -65,6 +61,14 @@ namespace Zhamanta
             eyebat.transform.rotation = Quaternion.Slerp(eyebat.transform.rotation,
                 Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
 
+            if (distanceToTarget >= 3.8f)
+            {
+                //Chase Player
+                Vector3 target = new Vector3(player.position.x, -1.5f, player.position.z);
+                //Vector3 target = new Vector3(player.position.x, player.position.y, player.position.z);
+                Vector3 newPos = Vector3.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+                rb.MovePosition(newPos);
+            }
 
             //Transition to Stage2
             if (animTracker.JustEnteredStage2() == true)
@@ -75,7 +79,7 @@ namespace Zhamanta
             else
             {
                 //Transition to Melee Attack
-                float distanceToTarget = Vector3.Distance(eyebat.transform.position, eyebat.Target.position);
+                //float distanceToTarget = Vector3.Distance(eyebat.transform.position, eyebat.Target.position);
 
                 if (distanceToTarget <= 5f)
                 {
