@@ -54,8 +54,9 @@ namespace Zhamanta
 
                 if (canTrigger)
                 {
-                    animTracker.IncreaseIndex();
                     canTrigger = false;
+                    animTracker.IncreaseIndex();
+                    Debug.Log("index: " + animTracker.GetAttackIndex());
                     animator.GetComponent<ElectricAttack>().ActivateElectricAttack();
                     animator.SetTrigger("walk");
                 }

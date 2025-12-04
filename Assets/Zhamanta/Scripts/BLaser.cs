@@ -71,11 +71,12 @@ namespace Zhamanta
                         }
                         animTracker.ResetShootCount();
                         Debug.Log("Does this happen once?");
+                        animTracker.IncreaseIndex();
+                        Debug.Log("index: " + animTracker.GetAttackIndex());
                         animator.SetTrigger("attack_sequence_done");
                     }
                     else
                     {
-                        animTracker.IncreaseIndex();
                         animator.SetTrigger("continue_sequence");
                     }
                 }

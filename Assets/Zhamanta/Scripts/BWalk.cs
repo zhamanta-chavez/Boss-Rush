@@ -39,13 +39,13 @@ namespace Zhamanta
 
             if (animTracker.GetFromAttack1() == true)
             {
-                //animTracker.SetFromAttack1(false);
+                Debug.Log("from attack 1");
             }
             else
             {
                 timeElapsed = 0;
             }
-            //Debug.Log(timeElapsed);
+            Debug.Log(timeElapsed);
         }
 
         //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -86,15 +86,18 @@ namespace Zhamanta
                 //Transition to Attack
                 if (timeElapsed >= 5f)
                 {
+                    Debug.Log("what");
                     animTracker.SetFromAttack1(false);
                     if (canIncreaseAttackCount)
                     {
                         canIncreaseAttackCount = false;
                         animTracker.IncreaseAttackCount();
                     }
+
                     if (animTracker.GetAttackCount() < 2)
                     {
                         //timeElapsed = 0;
+                        animator.ResetTrigger("attack_01");
                         animator.SetTrigger("attack_sequence");
                     }
                     else if (animTracker.GetAttackCount() >= 2)
@@ -102,11 +105,13 @@ namespace Zhamanta
                         if (animTracker.GetAttackCount() % 2 == 0)
                         {
                             //timeElapsed = 0;
+                            animator.ResetTrigger("attack_01");
                             animator.SetTrigger("electric_floor");
                         }
                         else
                         {
                             //timeElapsed = 0;
+                            animator.ResetTrigger("attack_01");
                             animator.SetTrigger("attack_sequence");
                         }
                     }

@@ -31,8 +31,8 @@ namespace Zhamanta
             eyebat = FindFirstObjectByType<Eyebat>();
             player = eyebat.Target;
             rb = eyebat.Rb;
-            canIncreaseAttackCount = true;
-            canChooseAttack = true;
+            //canIncreaseAttackCount = true;
+            //canChooseAttack = true;
 
             if (animTracker.GetFromAttack1() == true)
             {
@@ -101,14 +101,20 @@ namespace Zhamanta
                     {
                         case 0:
                             //timeElapsed = 0;
+                            //Debug.Log("index: " + animTracker.GetAttackIndex());
+                            animator.ResetTrigger("attack_01");
                             animator.SetTrigger("attack_sequence");
                             break;
                         case 1:
                             //timeElapsed = 0;
+                            //Debug.Log("index: " + animTracker.GetAttackIndex());
+                            animator.ResetTrigger("attack_01");
                             animator.SetTrigger("electric_floor");
                             break;
                         case 2:
                             //timeElapsed = 0;
+                            //Debug.Log("index: " + animTracker.GetAttackIndex());
+                            animator.ResetTrigger("attack_01");
                             animator.SetTrigger("revolving_doors");
                             break;
                     }

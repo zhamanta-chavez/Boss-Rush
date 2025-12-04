@@ -20,7 +20,7 @@ namespace Zhamanta
         {
             index++;
 
-            if (index >= 2)
+            if (index >= 3)
             {
                 index = 0;
             }
@@ -92,6 +92,7 @@ namespace Zhamanta
         {
             stage3 = true;
             onStage3 = true;
+            onStage2 = false;
         }
 
         public void FinishActivatingStage3()

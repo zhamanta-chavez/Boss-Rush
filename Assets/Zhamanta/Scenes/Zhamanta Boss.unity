@@ -2087,6 +2087,7 @@ MonoBehaviour:
   barFill: {fileID: 1745016826}
   animTracker: {fileID: 11400000, guid: b86a1c2a1eb7aed4fbdd3c7da9ae95d8, type: 2}
   trail: {fileID: 747226713}
+  arrows: {fileID: 1582269676}
   OnHalfLife:
     m_PersistentCalls:
       m_Calls:
@@ -2108,6 +2109,18 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: b86a1c2a1eb7aed4fbdd3c7da9ae95d8, type: 2}
         m_TargetAssemblyTypeName: Zhamanta.AnimatorTracker, Assembly-CSharp
         m_MethodName: ActivateStage3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1038288607}
+        m_TargetAssemblyTypeName: Zhamanta.StageDeterminant, Assembly-CSharp
+        m_MethodName: MakeArrowsFall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2824,6 +2837,53 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4158140380492717772, guid: 7134d986da18c9c419f5979f5fbaf084, type: 3}
   m_PrefabInstance: {fileID: 865517206}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1582269676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1582269677}
+  - component: {fileID: 1582269678}
+  m_Layer: 0
+  m_Name: Falling Arrows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1582269677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582269676}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 20.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1582269678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582269676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd34ebab7a2c314189377d90f6a7143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Zhamanta.FallingArrows
+  arrowPrefab: {fileID: 2094018982125152302, guid: f978ec93fc6654248a86538177b4dab0, type: 3}
+  player: {fileID: 1588902183}
+  animTracker: {fileID: 11400000, guid: b86a1c2a1eb7aed4fbdd3c7da9ae95d8, type: 2}
 --- !u!1 &1586638396 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5663832816931980160, guid: 92ea0fdec1e3d2b4082219a3842bfe5b, type: 3}
@@ -4741,7 +4801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8267154829788579919, guid: 0ca589b17b2fa29408d099352b8407c0, type: 3}
       propertyPath: damageAmount
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8267154829788579919, guid: 0ca589b17b2fa29408d099352b8407c0, type: 3}
       propertyPath: knockbackForce
@@ -4913,4 +4973,5 @@ SceneRoots:
   - {fileID: 1042488295}
   - {fileID: 2130679937}
   - {fileID: 804039848}
+  - {fileID: 1582269677}
   - {fileID: 1038288608}

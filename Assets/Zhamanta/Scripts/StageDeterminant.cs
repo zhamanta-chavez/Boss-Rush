@@ -12,6 +12,7 @@ namespace Zhamanta
         [SerializeField] private Image barFill;
         [SerializeField] AnimatorTracker animTracker;
         [SerializeField] GameObject trail;
+        [SerializeField] GameObject arrows;
 
         private bool canInvokeHalfLife;
         private bool canInvokeNearDeath;
@@ -25,6 +26,7 @@ namespace Zhamanta
             canInvokeHalfLife = true;
             canInvokeNearDeath = true;
             trail.SetActive(false);
+            arrows.SetActive(false);
         }
 
         private void Update()
@@ -54,16 +56,21 @@ namespace Zhamanta
 
         IEnumerator Stage2Margin()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3.5f);
             canInvokeHalfLife = false;
             animTracker.FinishActivatingStage2();
         }
 
         IEnumerator Stage3Margin()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3.5f);
             canInvokeNearDeath = false;
             animTracker.FinishActivatingStage3();
+        }
+
+        public void MakeArrowsFall()
+        {
+            arrows.SetActive(true);
         }
     }
 }
