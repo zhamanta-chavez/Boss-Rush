@@ -9,6 +9,8 @@ namespace Zhamanta
         [SerializeField] private int attackCount = 0;
 
         private bool stage2 = false;
+        private bool onStage2 = false;
+        private bool trailOn = false;
 
         public void IncreaseShootCount()
         {
@@ -33,6 +35,7 @@ namespace Zhamanta
         public void ActivateStage2()
         {
             stage2 = true;
+            onStage2 = true;
         }
 
         public void FinishActivatingStage2()
@@ -45,11 +48,28 @@ namespace Zhamanta
             return stage2;
         }
 
+        public bool OnStage2()
+        {
+            return onStage2;
+        }
+
+        public void TrailState(bool trailState)
+        {
+            trailOn = trailState;
+        }
+
+        public bool GetTrailState()
+        {
+            return trailOn;
+        }
+
         public void ResetValues()
         {
             shootCount = 0;
             attackCount = 0;
             stage2 = false;
+            onStage2 = false;
+            trailOn = false;
         }
     }
 }

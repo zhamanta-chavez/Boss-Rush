@@ -38,7 +38,6 @@ namespace Zhamanta
 
             if (animTracker.JustEnteredStage2() == true) //Transition to Stage2
             {
-                Debug.Log("Just Entered");
                 animator.SetTrigger("stage2");
             }
             else

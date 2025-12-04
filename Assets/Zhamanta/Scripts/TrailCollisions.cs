@@ -1,14 +1,33 @@
-using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace Zhamanta
 {
     public class TrailCollisions : MonoBehaviour
     {
+        [SerializeField] int damageAmount;
+        [SerializeField] float knockbackForce = 1;
+        [SerializeField] GameObject hitEffectPrefab;
+        [SerializeField] AudioClipCollection hitSounds;
+
+        public UnityEvent OnContact;
+        public UnityEvent OnSuccessfulHit;
+
         public TrailRenderer trailRenderer;
         public float detectionRange = 5.0f;
         public float damagePerSecond = 20.0f;
+
+        private void Start()
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        public void SetDamageAmount(int amount)
+        {
+            damageAmount = amount;
+        }
 
         private void FixedUpdate()
         {
@@ -31,11 +50,32 @@ namespace Zhamanta
 
                 if (Physics.SphereCast(startPosition, width, direction, out hit, distance, LayerMask.GetMask("Player")))
                 {
-                    //player has been hit, we can do damage to it
-                    Debug.Log("Player detected");
+                    if (hit.transform.gameObject.GetComponent<Damageable>())
+                    {
+                        Vector3 dir = hit.transform.position - transform.position;
+                        dir.Normalize();
+
+                        Damage damage = new Damage();
+                        damage.amount = damageAmount;
+                        damage.direction = dir;
+                        damage.knockbackForce = knockbackForce;
+
+                        if (hit.transform.gameObject.GetComponent<Damageable>().Hit(damage))
+                        {
+                            OnSuccessfulHit?.Invoke();
+
+                            if (hitEffectPrefab != null)
+                            {
+                                Instantiate(hitEffectPrefab, hit.transform.position, Quaternion.identity);
+                            }
+
+                            if (hitSounds != null)
+                                SoundEffectsManager.instance.PlayRandomClip(hitSounds.clips, true);
+                        }
+                    }
+
                     return;
                 }
-
             }
         }
 

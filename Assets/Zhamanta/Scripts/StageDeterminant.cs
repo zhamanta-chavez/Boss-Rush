@@ -11,6 +11,7 @@ namespace Zhamanta
     {
         [SerializeField] private Image barFill;
         [SerializeField] AnimatorTracker animTracker;
+        [SerializeField] GameObject trail;
 
         private bool canInvokeHalfLife;
 
@@ -20,6 +21,7 @@ namespace Zhamanta
         {
             animTracker.ResetValues();
             canInvokeHalfLife = true;
+            trail.SetActive(false);
         }
 
         private void Update()
@@ -28,6 +30,16 @@ namespace Zhamanta
             {
                 StartCoroutine(Stage2Margin());
                 OnHalfLife.Invoke();
+            }
+
+            if (animTracker.GetTrailState() == true)
+            {
+                trail.SetActive(true);
+                Debug.Log("Trail should be active");
+            }
+            else
+            {
+                trail.SetActive(false);
             }
         }
 

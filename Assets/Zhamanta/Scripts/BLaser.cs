@@ -39,11 +39,9 @@ namespace Zhamanta
             if (animTracker.JustEnteredStage2() == true) //Transition to Stage2
             {
                 animator.SetTrigger("stage2");
-                Debug.Log("Just Entered");
             }
             else //Sequence Attack
             {
-                Debug.Log("Here");
                 //Look at Player
                 Vector3 directionToTarget = (player.position - eyebat.transform.position);
                 directionToTarget.y = 0;
@@ -54,7 +52,7 @@ namespace Zhamanta
                 if (elapsedTime >= 1.5f && canShoot)
                 {
                     canShoot = false;
-                    GameObject p = Instantiate(projectile, eyebat.transform.position + new Vector3(0, 5f, 0), Quaternion.identity);
+                    GameObject p = Instantiate(projectile, eyebat.transform.position + new Vector3(0, 4.5f, 0), Quaternion.identity);
                     //GameObject p = Instantiate(projectile, eyebat.transform.position, Quaternion.identity);
                     animTracker.IncreaseShootCount();
                     p.transform.forward = eyebat.transform.forward;
@@ -63,6 +61,10 @@ namespace Zhamanta
                     {
                         if (animTracker.GetShootCount() % 5 == 0)
                         {
+                            if (animTracker.OnStage2() == true)
+                            {
+                                animTracker.TrailState(false);
+                            }
                             animator.SetTrigger("attack_sequence_done");
                         }
                         else

@@ -39,11 +39,15 @@ namespace Zhamanta
 
             if (animTracker.JustEnteredStage2() == true) //Transition to Stage2
             {
-                Debug.Log("Just Entered");
                 animator.SetTrigger("stage2");
             }
             else
             {
+                if (animTracker.OnStage2() == true)
+                {
+                    Debug.Log("Verified onStage2: " + animTracker.OnStage2());
+                    animTracker.TrailState(true);
+                }
                 //Choose Point to Move Towards
                 if (canChoosePoint)
                 {
