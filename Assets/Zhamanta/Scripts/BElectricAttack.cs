@@ -25,6 +25,7 @@ namespace Zhamanta
             rb = eyebat.Rb;
             player = eyebat.Target;
             canTrigger = true;
+            animTracker.PatienceSensorState(false);
         }
 
         //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -46,6 +47,11 @@ namespace Zhamanta
                 Debug.Log("Electric: Just Entered Stage 3");
                 animator.SetTrigger("stage3");
             }
+            else if (animTracker.GetIsDying())
+            {
+                animator.ResetTrigger("walk");
+                animator.SetTrigger("dying");
+            }
             else
             {
                 // Move to high center
@@ -66,7 +72,7 @@ namespace Zhamanta
         //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-
+            animTracker.PatienceSensorState(true);
         }
     }
 }

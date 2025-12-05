@@ -46,6 +46,12 @@ namespace Zhamanta
                 Debug.Log("Laser: Just Entered Stage 3");
                 animator.SetTrigger("stage3");
             }
+            else if (animTracker.GetIsDying())
+            {
+                animator.ResetTrigger("attack_sequence_done");
+                animator.ResetTrigger("continue_sequence");
+                animator.SetTrigger("dying");
+            }
             else //Sequence Attack
             {
                 //Look at Player

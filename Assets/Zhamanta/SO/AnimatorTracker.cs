@@ -14,7 +14,29 @@ namespace Zhamanta
         private bool onStage3 = false;
         private bool trailOn = false;
         private bool fromAttack1 = false;
+        private bool isDying = false;
         private int index = 0;
+        private bool patienceSensorOn = true;
+
+        public void PatienceSensorState(bool state)
+        {
+            patienceSensorOn = state;   
+        }
+
+        public bool GetPatienceSensorState()
+        {
+            return patienceSensorOn;
+        }
+
+        public void SetDying(bool isDying)
+        {
+            this.isDying = isDying;
+        }
+
+        public bool GetIsDying()
+        {
+            return this.isDying;
+        }
 
         public void IncreaseIndex()
         {
@@ -132,6 +154,8 @@ namespace Zhamanta
             onStage3 = false;
             trailOn = false;
             fromAttack1 = false;
+            isDying = false;
+            patienceSensorOn = true;
         }
     }
 }

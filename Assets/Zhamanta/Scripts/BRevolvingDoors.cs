@@ -47,6 +47,11 @@ namespace Zhamanta
                 Debug.Log("Doors: Just Entered Stage 3");
                 animator.SetTrigger("stage3");
             }
+            else if (animTracker.GetIsDying())
+            {
+                animator.ResetTrigger("walk");
+                animator.SetTrigger("dying");
+            }
             else
             {
                 if (canTrigger)

@@ -19,15 +19,18 @@ namespace Zhamanta
 
         private bool canInvokeHalfLife;
         private bool canInvokeNearDeath;
+        private bool canSetDying;
 
         public UnityEvent OnHalfLife;
         public UnityEvent OnNearDeath;
+        public UnityEvent OnNextScene;
 
         private void Start()
         {
             animTracker.ResetValues();
             canInvokeHalfLife = true;
             canInvokeNearDeath = true;
+            canSetDying = true;
             trail.SetActive(false);
             arrows.SetActive(false);
         }
@@ -55,27 +58,40 @@ namespace Zhamanta
             {
                 trail.SetActive(false);
             }
+
+            if (animTracker.GetPatienceSensorState() == true)
+            {
+                patienceSensor.enabled = true;
+            }
+            else
+            {
+                patienceSensor.enabled = false;
+            }
+
+            Dying();
         }
 
         IEnumerator Stage2Margin()
         {
-            patienceSensor.enabled = false;
+            animTracker.PatienceSensorState(false);
             bossDamageable.enabled = false;
             yield return new WaitForSeconds(6f);
             canInvokeHalfLife = false;
             animTracker.FinishActivatingStage2();
-            patienceSensor.enabled = true;
+            animTracker.PatienceSensorState(true);
             bossDamageable.enabled = true;
         }
 
         IEnumerator Stage3Margin()
         {
-            patienceSensor.enabled = false;
+            animTracker.PatienceSensorState(false);
             bossDamageable.enabled = false;
             yield return new WaitForSeconds(6f);
             canInvokeNearDeath = false;
             animTracker.FinishActivatingStage3();
             bossDamageable.enabled = true;
+            MakeArrowsFall();
+            animTracker.TrailState(true);
         }
 
         public void MakeArrowsFall()
@@ -96,8 +112,10 @@ namespace Zhamanta
 
         public void Dying()
         {
-            if (barFill.fillAmount <= 0)
+            if (barFill.fillAmount <= 0 && canSetDying)
             {
+                animTracker.SetDying(true);
+                canSetDying = false;
                 animator.ResetTrigger("heal");
                 animator.ResetTrigger("attack_sequence_done");
                 animator.ResetTrigger("attack_sequence");
@@ -108,8 +126,17 @@ namespace Zhamanta
                 animator.ResetTrigger("walk");
                 animator.SetTrigger("dying");
                 bossDamageable.enabled = false;
+                arrows.SetActive(false);
+                animTracker.TrailState(false);
                 Debug.Log("Dying set");
+                StartCoroutine(WaitForNextScene());
             }
+        }
+
+        IEnumerator WaitForNextScene()
+        {
+            yield return new WaitForSeconds(5);
+            OnNextScene.Invoke();
         }
     }
 }

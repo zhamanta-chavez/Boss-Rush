@@ -47,6 +47,12 @@ namespace Zhamanta
                 Debug.Log("Dash: Just Entered Stage 3");
                 animator.SetTrigger("stage3");
             }
+            else if (animTracker.GetIsDying())
+            {
+                animator.ResetTrigger("laser");
+                animator.ResetTrigger("walk");
+                animator.SetTrigger("dying");
+            }
             else
             {
                 if (animTracker.OnStage2() == true)

@@ -72,8 +72,13 @@ namespace Zhamanta
             if (animTracker.JustEnteredStage3() == true)
             {
                 Debug.Log("Run: Just Entered Stage 3");
-                animTracker.TrailState(true);
+                //animTracker.TrailState(true);
                 animator.SetTrigger("stage3");
+            }
+            else if (animTracker.GetIsDying())
+            {
+                animator.ResetTrigger("attack_01");
+                animator.SetTrigger("dying");
             }
             else
             {
