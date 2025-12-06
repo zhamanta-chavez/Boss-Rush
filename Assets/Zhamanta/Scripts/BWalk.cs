@@ -61,7 +61,7 @@ namespace Zhamanta
             eyebat.transform.rotation = Quaternion.Slerp(eyebat.transform.rotation,
                 Quaternion.LookRotation(directionToTarget.normalized), 2f * Time.deltaTime);
 
-            if (distanceToTarget >= 3.8f)
+            if (distanceToTarget >= 1f)
             {
                 //Chase Player
                 Vector3 target = new Vector3(player.position.x, -1.5f, player.position.z);

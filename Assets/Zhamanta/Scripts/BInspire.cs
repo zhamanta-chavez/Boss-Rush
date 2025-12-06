@@ -5,6 +5,7 @@ namespace Zhamanta
     public class BInspire : StateMachineBehaviour
     {
         private float timeElapsed = 0f;
+        [SerializeField] float transitionTime = 1.5f;
 
         //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -17,7 +18,7 @@ namespace Zhamanta
         {
             timeElapsed += Time.deltaTime;
 
-            if (timeElapsed >= 1.5f)
+            if (timeElapsed >= transitionTime)
             {
                 animator.SetTrigger("walk");
             }

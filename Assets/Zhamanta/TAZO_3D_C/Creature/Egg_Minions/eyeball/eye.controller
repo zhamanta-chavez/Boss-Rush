@@ -403,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29146ace814e0cd4a96c2b72483c3b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  transitionTime: 2.5
 --- !u!1101 &-4261542488241652736
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
