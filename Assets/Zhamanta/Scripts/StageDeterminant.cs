@@ -12,6 +12,7 @@ namespace Zhamanta
         [SerializeField] private Image barFill;
         [SerializeField] private Image patienceBar;
         [SerializeField] private Image patienceBarBg;
+        [SerializeField] private Image babiesDrawing;
         [SerializeField] Animator animator;
         [SerializeField] AnimatorTracker animTracker;
         [SerializeField] GameObject trail;
@@ -82,12 +83,14 @@ namespace Zhamanta
                 patienceSensor.enabled = true;
                 patienceBar.enabled = true;
                 patienceBarBg.enabled = true;
+                babiesDrawing.enabled = true;
             }
             else
             {
                 patienceSensor.enabled = false;
                 patienceBar.enabled = false;
                 patienceBarBg.enabled = false;
+                babiesDrawing.enabled = false;
             }
 
             if (animTracker.GetHealerState() == true)

@@ -21,6 +21,12 @@ namespace Zhamanta
                 animTracker.SetLaserOn(false);
                 LaserSound();
             }
+
+            if (animTracker.GetLaughSoundOn())
+            {
+                animTracker.SetLaughOn(false);
+                TransitionLaugh();
+            }
         }
 
         public void ChangeToSadMusic()

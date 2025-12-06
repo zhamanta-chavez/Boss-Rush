@@ -20,6 +20,17 @@ namespace Zhamanta
         private bool healerOn = false;
         private bool fetchEyebat = false;
         private bool laserSoundOn = false;
+        private bool laughSoundOn = false;
+
+        public void SetLaughOn(bool state)
+        {
+            laughSoundOn = state;
+        }
+
+        public bool GetLaughSoundOn()
+        {
+            return laughSoundOn;
+        }
 
         public void SetLaserOn(bool state)
         {
@@ -192,6 +203,8 @@ namespace Zhamanta
             patienceSensorOn = true;
             healerOn = false;
             fetchEyebat = false;
-    }
+            laserSoundOn = false;
+            laughSoundOn = false;
+        }
     }
 }

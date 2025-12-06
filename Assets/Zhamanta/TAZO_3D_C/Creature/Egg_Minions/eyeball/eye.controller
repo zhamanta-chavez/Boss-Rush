@@ -743,6 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdc5397b451c11459cc2ea829e28f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  animTracker: {fileID: 11400000, guid: b86a1c2a1eb7aed4fbdd3c7da9ae95d8, type: 2}
 --- !u!1102 &-1481906836944453955
 AnimatorState:
   serializedVersion: 6
@@ -2541,6 +2542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdc5397b451c11459cc2ea829e28f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  animTracker: {fileID: 11400000, guid: b86a1c2a1eb7aed4fbdd3c7da9ae95d8, type: 2}
 --- !u!1101 &2225437441821014471
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
