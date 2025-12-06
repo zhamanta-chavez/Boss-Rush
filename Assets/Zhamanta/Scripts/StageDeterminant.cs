@@ -10,6 +10,8 @@ namespace Zhamanta
     public class StageDeterminant : MonoBehaviour
     {
         [SerializeField] private Image barFill;
+        [SerializeField] private Image patienceBar;
+        [SerializeField] private Image patienceBarBg;
         [SerializeField] Animator animator;
         [SerializeField] AnimatorTracker animTracker;
         [SerializeField] GameObject trail;
@@ -17,6 +19,12 @@ namespace Zhamanta
         [SerializeField] Damageable bossDamageable;
         [SerializeField] Retreat patienceSensor;
         [SerializeField] SphereCollider healer;
+        [SerializeField] PlayerLogic playerLogic;
+        [SerializeField] Rigidbody eyebatRb;
+        [SerializeField] float dyingSpeed = 1;
+        [SerializeField] Transform player;
+        [SerializeField] Collider playerCollider;
+        Vector3 originalPlayerPosition;
 
         private bool canInvokeHalfLife;
         private bool canInvokeNearDeath;
@@ -25,6 +33,10 @@ namespace Zhamanta
         public UnityEvent OnHalfLife;
         public UnityEvent OnNearDeath;
         public UnityEvent OnNextScene;
+        public UnityEvent OnLookAtDeath;
+        public UnityEvent OnLookAtBabiesComing;
+        public UnityEvent OnLookAtHelp;
+        public UnityEvent OnLookAtRetreat;
 
         private void Start()
         {
@@ -35,6 +47,9 @@ namespace Zhamanta
             trail.SetActive(false);
             arrows.SetActive(false);
             healer.enabled = false;
+            originalPlayerPosition = player.transform.position;
+            animTracker.PatienceSensorState(false);
+            StartCoroutine(TurnOnSensor());
         }
 
         private void Update()
@@ -59,15 +74,20 @@ namespace Zhamanta
             else
             {
                 trail.SetActive(false);
+                Debug.Log("Here");
             }
 
             if (animTracker.GetPatienceSensorState() == true)
             {
                 patienceSensor.enabled = true;
+                patienceBar.enabled = true;
+                patienceBarBg.enabled = true;
             }
             else
             {
                 patienceSensor.enabled = false;
+                patienceBar.enabled = false;
+                patienceBarBg.enabled = false;
             }
 
             if (animTracker.GetHealerState() == true)
@@ -77,6 +97,13 @@ namespace Zhamanta
             else
             {
                 healer.enabled = false;
+            }
+
+            if (animTracker.GetIsDying() == true)
+            {
+                Vector3 target = new Vector3(0, 0, 0);
+                Vector3 newPos = Vector3.MoveTowards(eyebatRb.position, target, dyingSpeed * Time.fixedDeltaTime);
+                eyebatRb.MovePosition(newPos);
             }
 
             Dying();
@@ -103,6 +130,7 @@ namespace Zhamanta
             bossDamageable.enabled = true;
             MakeArrowsFall();
             animTracker.TrailState(true);
+            Debug.Log("Done");
         }
 
         public void MakeArrowsFall()
@@ -137,17 +165,58 @@ namespace Zhamanta
                 animator.ResetTrigger("walk");
                 animator.SetTrigger("dying");
                 bossDamageable.enabled = false;
-                arrows.SetActive(false);
                 animTracker.TrailState(false);
+                arrows.SetActive(false);
+                playerLogic.enabled = false;
+                playerCollider.enabled = false;
                 Debug.Log("Dying set");
-                StartCoroutine(WaitForNextScene());
+                StartCoroutine(StartPostDeathScene());
+                //StartCoroutine(WaitForNextScene());
             }
         }
 
+        IEnumerator StartPostDeathScene()
+        {
+            yield return new WaitForSeconds(5f);
+            //animTracker.SetDying(false);
+            player.transform.position = originalPlayerPosition;
+            OnLookAtDeath.Invoke();
+            StartCoroutine(LookAtBabiesComing());
+        }
+
+        IEnumerator LookAtBabiesComing()
+        {
+            yield return new WaitForSeconds(7f);
+            animTracker.SetFetchEyebat(true);
+            OnLookAtBabiesComing.Invoke();
+            StartCoroutine(LookAtHelp());
+        }
+
+        IEnumerator LookAtHelp()
+        {
+            yield return new WaitForSeconds(3f);
+            OnLookAtHelp.Invoke();
+            StartCoroutine(LookAtRetreat());
+        }
+
+        IEnumerator LookAtRetreat()
+        {
+            yield return new WaitForSeconds(3f);
+            animTracker.SetFetchEyebat(false);
+            yield return new WaitForSeconds(1.5f);
+            OnLookAtRetreat.Invoke();
+            StartCoroutine(WaitForNextScene());
+        }
         IEnumerator WaitForNextScene()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3f);
             OnNextScene.Invoke();
+        }
+
+        IEnumerator TurnOnSensor()
+        {
+            yield return new WaitForSeconds(3f);
+            animTracker.PatienceSensorState(true);
         }
     }
 }

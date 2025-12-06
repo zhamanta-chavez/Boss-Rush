@@ -67,6 +67,7 @@ namespace Zhamanta
                     GameObject p = Instantiate(projectile, eyebat.transform.position + new Vector3(0, 4.5f, 0), Quaternion.identity);
                     //GameObject p = Instantiate(projectile, eyebat.transform.position, Quaternion.identity);
                     animTracker.IncreaseShootCount();
+                    animTracker.SetLaserOn(true);
                     p.transform.forward = eyebat.transform.forward;
 
                     if (animTracker.GetShootCount() == 5)

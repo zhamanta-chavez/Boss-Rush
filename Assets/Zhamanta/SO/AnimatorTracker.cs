@@ -12,12 +12,34 @@ namespace Zhamanta
         private bool onStage2 = false;
         private bool stage3 = false;
         private bool onStage3 = false;
-        private bool trailOn = false;
+        [SerializeField] private bool trailOn = false;
         private bool fromAttack1 = false;
         private bool isDying = false;
         private int index = 0;
         private bool patienceSensorOn = true;
         private bool healerOn = false;
+        private bool fetchEyebat = false;
+        private bool laserSoundOn = false;
+
+        public void SetLaserOn(bool state)
+        {
+            laserSoundOn = state;
+        }
+
+        public bool GetLaserSoundOn()
+        {
+            return laserSoundOn;
+        }
+
+        public void SetFetchEyebat(bool state)
+        {
+            fetchEyebat = state;
+        }
+
+        public bool GetFetchEyebat()
+        {
+            return fetchEyebat;
+        }
 
         public void SetHealerState(bool state)
         {
@@ -148,6 +170,7 @@ namespace Zhamanta
         public void TrailState(bool trailState)
         {
             trailOn = trailState;
+            Debug.Log("trail state is being called");
         }
 
         public bool GetTrailState()
@@ -168,6 +191,7 @@ namespace Zhamanta
             isDying = false;
             patienceSensorOn = true;
             healerOn = false;
-        }
+            fetchEyebat = false;
+    }
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace Zhamanta
 {
@@ -8,6 +9,8 @@ namespace Zhamanta
     {
         [SerializeField] GameObject electricSign;
         [SerializeField] GameObject electricFloor;
+        public UnityEvent OnWarning;
+        public UnityEvent OnElectric;
 
         private int signCount = 0;
 
@@ -28,6 +31,7 @@ namespace Zhamanta
             while (signCount <= 2)
             {
                 electricSign.SetActive(true);
+                OnWarning.Invoke();
                 yield return new WaitForSeconds(.2f);
                 electricSign.SetActive(false);
                 yield return new WaitForSeconds(.2f);
@@ -35,6 +39,7 @@ namespace Zhamanta
             }
 
             electricFloor.SetActive(true);
+            OnElectric.Invoke();
             yield return new WaitForSeconds(.3f);
             electricFloor.SetActive(false);
         }

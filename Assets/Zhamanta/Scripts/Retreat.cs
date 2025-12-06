@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Collections;
 
 namespace Zhamanta
 {
@@ -10,6 +11,7 @@ namespace Zhamanta
         [SerializeField] float patience;
         [SerializeField] float maxPatience = 4;
         [SerializeField] Image patienceBar;
+        [SerializeField] Image patienceBarBg;
         private bool playerInSphere;
 
         public UnityEvent OnMaxPatience;
@@ -18,6 +20,7 @@ namespace Zhamanta
         {
             patience = 0;
             playerInSphere = false;
+            patienceBar.fillAmount = 0;
         }
 
         private void Update()

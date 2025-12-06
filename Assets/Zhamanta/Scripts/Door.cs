@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine.Splines;
 using Unity.VisualScripting;
+using UnityEngine.Events;
 
 namespace Zhamanta
 {
@@ -19,8 +20,12 @@ namespace Zhamanta
         private bool canStartCoroutine;
         private bool canStartNormalRoutine;
 
+        public UnityEvent OnDoorActive;
+        public UnityEvent OnDoorElectric;
+
         void OnEnable()
         {
+            OnDoorActive.Invoke();
             fadeIn = true;
             fadeAway = false;
             canStartCoroutine = true;
@@ -56,6 +61,7 @@ namespace Zhamanta
         {
             box.enabled = true;
             sp.color = Color.blue;
+            OnDoorElectric.Invoke();
             yield return new WaitForSeconds(.5f);
             sa.Play();
             yield return new WaitForSeconds(5f);
