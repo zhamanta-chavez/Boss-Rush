@@ -17,6 +17,17 @@ namespace Zhamanta
         private bool isDying = false;
         private int index = 0;
         private bool patienceSensorOn = true;
+        private bool healerOn = false;
+
+        public void SetHealerState(bool state)
+        {
+            healerOn = state;
+        }
+
+        public bool GetHealerState()
+        {
+            return healerOn;
+        }
 
         public void PatienceSensorState(bool state)
         {
@@ -156,6 +167,7 @@ namespace Zhamanta
             fromAttack1 = false;
             isDying = false;
             patienceSensorOn = true;
+            healerOn = false;
         }
     }
 }

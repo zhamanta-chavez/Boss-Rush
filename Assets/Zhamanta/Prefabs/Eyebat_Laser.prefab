@@ -35,7 +35,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 1.1955, y: 1.1955, z: 1.1955}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7952895262525461723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1547900086105775525
@@ -308,3 +309,190 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1001 &4506765261889820997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6713330112800197122}
+    m_Modifications:
+    - target: {fileID: 91273973035156732, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034700375001605414, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034700375001605414, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_Color.g
+      value: 0.26737964
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034700375001605414, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_Color.r
+      value: 0.76470584
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034700375001605414, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034700375001605414, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464211568921416440, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.01760149
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464211568921416440, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464211568921416440, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464211568921416440, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0.06774902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464211568921416440, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464211568921416440, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464211568921416440, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382795560878698138, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433368, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433368, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433368, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433373, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_Name
+      value: CFXR4 Bouncing Glows Bubble (Blue Purple) 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8364701
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8364701
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8364701
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433375, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708729512989566163, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7708729512989566163, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5796857987393419249}
+  m_SourcePrefab: {fileID: 100100000, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+--- !u!1 &6084881546279615894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7708729512989566163, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+  m_PrefabInstance: {fileID: 4506765261889820997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5796857987393419249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084881546279615894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
+--- !u!4 &7952895262525461723 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5824670795371433374, guid: 19939541314ac714db8e7bf8783f9f69, type: 3}
+  m_PrefabInstance: {fileID: 4506765261889820997}
+  m_PrefabAsset: {fileID: 0}

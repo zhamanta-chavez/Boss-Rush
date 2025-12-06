@@ -22,6 +22,7 @@ namespace Zhamanta
             rb = eyebat.Rb;
 
             timeElapsed = 0;
+            animTracker.SetHealerState(true);
         }
 
         //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -42,7 +43,7 @@ namespace Zhamanta
         //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-
+            animTracker.SetHealerState(false);
         }
     }
 }

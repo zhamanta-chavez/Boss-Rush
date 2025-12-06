@@ -105,7 +105,7 @@ namespace Zhamanta
                 }*/
 
                 //Transition to Attack
-                if (timeElapsed >= 6f)
+                if (timeElapsed >= 5f)
                 {
                     animTracker.SetFromAttack1(false);
                     switch (animTracker.GetAttackIndex())

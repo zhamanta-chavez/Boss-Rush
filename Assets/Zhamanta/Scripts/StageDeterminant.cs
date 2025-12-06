@@ -16,6 +16,7 @@ namespace Zhamanta
         [SerializeField] GameObject arrows;
         [SerializeField] Damageable bossDamageable;
         [SerializeField] Retreat patienceSensor;
+        [SerializeField] SphereCollider healer;
 
         private bool canInvokeHalfLife;
         private bool canInvokeNearDeath;
@@ -33,6 +34,7 @@ namespace Zhamanta
             canSetDying = true;
             trail.SetActive(false);
             arrows.SetActive(false);
+            healer.enabled = false;
         }
 
         private void Update()
@@ -66,6 +68,15 @@ namespace Zhamanta
             else
             {
                 patienceSensor.enabled = false;
+            }
+
+            if (animTracker.GetHealerState() == true)
+            {
+                healer.enabled = true;
+            }
+            else
+            {
+                healer.enabled = false;
             }
 
             Dying();
